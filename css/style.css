@@ -1156,6 +1156,10 @@ footer.card {
     .ul-info {
         width: 260px;
     }
+    .work_line {
+        line-height: 1em;
+        margin-bottom: 7px;
+    }
 }
 
 @media screen and (max-width: 300px) {
