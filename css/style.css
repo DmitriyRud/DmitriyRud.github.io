@@ -38,7 +38,7 @@ body {
 
 @-moz-document url-prefix() {
     .card {
-        background-color: rgba(61, 64, 71, 0.65);
+        background-color: rgba(61, 64, 71, 0.8);
     }
 }
 
@@ -194,7 +194,7 @@ ul {
 
 .title-links {
     display: inline-block;
-    margin-bottom: 20px;
+    margin: 10px 0;
 }
 
 .ul-social-links {
@@ -203,7 +203,7 @@ ul {
 
 .li-social-links {
     display: inline-block;
-    margin: 0 5px 12px;
+    margin: 0 5px 12px 0;
 }
 
 .li-social-links a {
@@ -550,6 +550,12 @@ article.skills {
 
 .school {
     width: 90%;
+    line-height: 1em;
+    margin-right: 5px;
+}
+
+.school div:first-child {
+    margin-bottom: 10px;
 }
 
 .school i {
@@ -565,7 +571,7 @@ article.skills {
 }
 
 .school_icon {
-    width: 2em;
+    min-width: 2em;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -722,8 +728,8 @@ article.skills {
     display: flex;
     justify-content: space-around;
     padding: 0;
-    margin-top: -1em;
-    margin-bottom: 2em;
+    margin-top: 1em;
+    margin-bottom: 1.5em;
 }
 
 .work_line:first-child {
@@ -865,7 +871,7 @@ footer.card {
         width: 100%;
     }
     h2 {
-        font-size: 2.5em;
+        font-size: 2.3em;
     }
     .available {
         margin-bottom: 0;
@@ -922,7 +928,7 @@ footer.card {
         margin-bottom: 3em;
     }
     .experience2 .see_more {
-        width: 50%;
+        width: 60%;
         margin-top: -1em;
     }
     .hobbies_container {
@@ -933,12 +939,33 @@ footer.card {
     }
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1120px) {
+    .footer_profile {
+        flex-direction: column;
+    }
+    .col_contacts {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1050px) {
+    .experience2 .see_more {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 970px) {
     h2 {
         font-size: 2em;
     }
     .experience2 .see_more {
-        width: 60%;
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    h2 {
+        font-size: 1.8em;
     }
     .school_cards {
         flex-direction: row;
@@ -959,7 +986,79 @@ footer.card {
     }
 }
 
-@media screen and (max-width: 790px) {
+@media screen and (max-width: 800px) {
+    .work_description div:last-child {
+        margin-bottom: 1em;
+    }
+    .experience2 .cv_button {
+        font-size: 1.2em;
+    }
+}
+
+@media screen and (min-width: 620px) and (max-width: 800px) {
+    .card {
+        padding-top: 10px;
+    }
+    footer {
+        padding-top: 0 !important;
+    }
+    .info_profile {
+        padding-top: 20px;
+    }
+    h2 {
+        font-size: 2.5em;
+    }
+    .photo img {
+        width: 70%;
+    }
+    .r_column {
+        order: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .title-info {
+        width: 60px;
+    }
+    .footer_profile {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 10px 0 30px;
+    }
+    .col_contacts {
+        margin-right: 10px;
+        width: 40%;
+    }
+    .second_contacts {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0;
+        margin-left: -30px;
+    }
+    .social {
+        margin-top: 0;
+    }
+    .title-links {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 5px;
+    }
+    .ul-social-links {
+        text-align: center;
+    }
+    .l_column {
+        order: 1;
+    }
+    .skills_checklist {
+        flex-direction: row;
+    }
+}
+
+@media screen and (min-width: 620px) and (max-width: 790px) {
     .years {
         width: 30%;
     }
@@ -969,18 +1068,56 @@ footer.card {
     }
 }
 
+@media screen and (min-width: 620px) and (max-width: 710px) {
+    .footer_profile {
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+    .col_contacts {
+        min-width: 45%;
+    }
+    .second_contacts {}
+    .social {
+        margin-top: 1em;
+    }
+}
+
 @media screen and (max-width: 640px) {
     main {
         overflow: hidden;
     }
     .card {
         margin-right: 0%;
+        padding-top: 20px;
+    }
+    footer {
+        padding-top: 0 !important;
+    }
+    .photo img {
+        width: 80%;
+    }
+    .second_contacts {
+        width: 50%;
+    }
+    .ul-info {
+        width: 300px;
+    }
+    .social {
+        text-align: center;
+    }
+    .title-links {
+        margin-bottom: 5px;
     }
     h2 {
         font-size: 30px;
     }
     h3 {
         padding-top: 3px;
+    }
+    .skills_checklist {
+        margin-top: 5px;
+        flex-direction: row;
     }
     .experience2 .see_more {
         width: 90%;
@@ -991,5 +1128,71 @@ footer.card {
     .years h3 {
         min-width: 5em;
         padding: 5px;
+    }
+    .experience2 .cv_button {
+        font-size: 1em;
+    }
+    footer .card {
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    h2 {
+        line-height: 1em;
+        font-size: 1.5em;
+    }
+    .years h3 {
+        margin: 10px;
+        padding: 3px;
+        font-size: 1.1em;
+    }
+    .school {
+        width: 70%;
+    }
+    .face.face1 .content i {
+        font-size: 3em;
+    }
+    .ul-info {
+        width: 260px;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    .photo img {
+        width: 95%;
+    }
+    h2 {
+        font-size: 1.5em;
+    }
+    .title-info {
+        width: 50px;
+    }
+    .ul-info {
+        width: 250px;
+    }
+    .info {
+        width: 200px;
+        font-size: 1em;
+    }
+    .add_skill_name {
+        margin-left: -5px;
+    }
+    .years h3 {
+        margin: 5px;
+        padding: 2px;
+        font-size: 1em;
+    }
+    .school {
+        width: 60%;
+    }
+    .face.face1 .content i {
+        font-size: 2em;
+    }
+    .work_description {
+        line-height: 1em;
+    }
+    .work_line {
+        margin-bottom: 10px;
     }
 }
