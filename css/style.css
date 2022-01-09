@@ -1026,6 +1026,29 @@ footer.card {
     }
 }
 
+@media screen and (max-width: 1900px) {
+    .language {
+        right: 3%;
+        top: 5%;
+    }
+}
+
+@media screen and (max-width: 1550px) {
+    .language {
+        position: relative;
+        margin-top: 2em;
+        width: 100%;
+        right: unset;
+        top: unset;
+    }
+    .lang_field {
+        width: 200px;
+    }
+    .card {
+        margin-top: 2em;
+    }
+}
+
 @media screen and (max-width: 1120px) {
     .footer_profile {
         flex-direction: column;
@@ -1171,10 +1194,17 @@ footer.card {
 }
 
 @media screen and (max-width: 640px) {
+    .language {
+        margin-top: 1em;
+    }
+    .lang_field {
+        font-size: 1em;
+    }
     main {
         overflow: hidden;
     }
     .card {
+        margin-top: 1em;
         margin-right: 0%;
         padding-top: 20px;
     }
