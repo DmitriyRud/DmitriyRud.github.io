@@ -16,10 +16,32 @@
     <!-- Google Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:300,400,700|PT+Sans+Narrow:400,700">
     <script src="https://kit.fontawesome.com/6b587ba060.js" crossorigin="anonymous"></script>
-
+    <script>
+        function toRussian() {
+            location.href = `index.html?posY=${window.scrollY}`;
+        }
+        window.onload = function() {
+            let queryDict = {};
+            location.search.substr(1).split("&").forEach(function(item) {
+                queryDict[item.split("=")[0]] = item.split("=")[1]
+            });
+            let Y = queryDict['posY'];
+            window.scrollTo(0, Number(Y));
+        }
+    </script>
 </head>
 
 <body>
+    <div class="language">
+        <div class="lang_field" onclick="toRussian()">
+            <div class="ru_lang">Русский</div>
+            <label class="checkbox-lang">
+            <input type="checkbox" checked="checked">
+            <span class="checkbox-switch"></span>
+        </label>
+            <div class="en_lang">English</div>
+        </div>
+    </div>
     <div class="container" id="top">
         <div class="left_space">
 
