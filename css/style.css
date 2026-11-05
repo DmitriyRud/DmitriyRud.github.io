@@ -1,13 +1,31 @@
 body {
     background-color: #2a2c30;
     color: #eeeeee;
-    background-image: url(../img/world_2000x1199.jpg);
-    background-attachment: fixed;
-    background-size: cover;
     letter-spacing: .5px;
     line-height: 28px;
     padding: 0;
     font-family: 'PT Sans Narrow', sans-serif;
+}
+
+
+/* Page background: a fixed layer is composited once instead of being repainted on every scroll */
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background-color: #2a2c30;
+    background-image: url(../img/world_2000x1199.jpg);
+    background-image: image-set(url(../img/world_2000x1199.webp) type("image/webp"), url(../img/world_2000x1199.jpg) type("image/jpeg"));
+    background-size: cover;
+}
+
+@media screen and (max-width: 1200px) {
+    body::before {
+        background-image: url(../img/world_1200x675.jpg);
+        background-image: image-set(url(../img/world_1200x675.webp) type("image/webp"), url(../img/world_1200x675.jpg) type("image/jpeg"));
+    }
 }
 
 
@@ -29,6 +47,16 @@ body {
     width: 100%;
     justify-content: space-between;
     font-size: 1.2em;
+    color: inherit;
+}
+
+.lang_field span {
+    color: inherit;
+}
+
+.lang_field:focus-visible {
+    outline: 2px solid #00adb5;
+    outline-offset: 4px;
 }
 
 .checkbox-lang {
@@ -68,32 +96,18 @@ body {
     transition: .15s;
 }
 
-.checkbox-lang input[type=checkbox] {
-    display: block;
-    width: 0;
-    height: 0;
-    position: absolute;
-    z-index: -1;
-    opacity: 0;
-}
-
-.checkbox-lang input[type=checkbox]:not(:disabled):active+.checkbox-switch:before {
+.lang_field:active .checkbox-switch:before {
     box-shadow: inset 0 0 2px rgba(0, 0, 0, .3);
 }
 
-.checkbox-lang input[type=checkbox]:checked+.checkbox-switch {
-    background-image: url("img/us_flag.jpg");
-}
-
-.checkbox-lang input[type=checkbox]:checked+.checkbox-switch:before {
+.checkbox-lang .checkbox-switch.is-en:before {
     transform: translateX(28px);
 }
 
 
 /* Hover */
 
-.checkbox-lang input[type="checkbox"]:not(:disabled)+.checkbox-switch {
-    cursor: pointer;
+.lang_field:hover .checkbox-switch {
     border-color: rgba(0, 0, 0, .3);
 }
 
@@ -103,6 +117,7 @@ body {
     border: 0;
     overflow: hidden;
     width: 100%;
+    height: auto;
 }
 
 .photo {
@@ -212,6 +227,7 @@ p {
 .info {
     font-family: 'PT Sans Narrow', sans-serif;
     color: #eeeeee;
+    overflow-wrap: anywhere;
 }
 
 .title-links {
@@ -301,6 +317,33 @@ ul {
     text-align: center;
     transition: all .2s;
     border: 1px solid #aaaaaa;
+}
+
+.li-social-links a[data-tooltip] {
+    position: relative;
+}
+
+.li-social-links a[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 0 8px;
+    background: #222831;
+    color: #eeeeee;
+    font-size: 0.85em;
+    line-height: 1.8;
+    white-space: nowrap;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, .4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s;
+}
+
+.li-social-links a[data-tooltip]:hover::after,
+.li-social-links a[data-tooltip]:focus-visible::after {
+    opacity: 1;
 }
 
 .li-social-links a:hover {
@@ -445,23 +488,31 @@ article.skills {
 }
 
 .sun {
+    --p: 0;
     position: relative;
     text-align: center;
     line-height: 4em;
 }
 
-.sun div {
+.sun::before {
+    content: '';
     position: absolute;
     top: 0;
     left: 50%;
-    width: 4px;
-    height: 4em;
-    margin-left: -1px;
-    border: solid #aaaaaa;
-    border-width: 10px 0 10px 0;
+    /* 4em + two 10px dashes, same geometry as the old 10-div version */
+    width: calc(4em + 20px);
+    height: calc(4em + 20px);
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: conic-gradient(from -9deg, #a5df41 calc(var(--p) * 3.6deg), #aaaaaa 0);
+    -webkit-mask: repeating-conic-gradient(from -3deg, #000 0 6deg, transparent 0 18deg), radial-gradient(closest-side, transparent calc(100% - 10px), #000 calc(100% - 10px));
+    -webkit-mask-composite: source-in;
+    mask: repeating-conic-gradient(from -3deg, #000 0 6deg, transparent 0 18deg), radial-gradient(closest-side, transparent calc(100% - 10px), #000 calc(100% - 10px));
+    mask-composite: intersect;
 }
 
 .sun p {
+    position: relative;
     font-family: 'PT Sans Narrow', sans-serif;
     font-size: 1em;
     color: #aaaaaa;
@@ -475,75 +526,6 @@ article.skills {
     text-align: center;
     line-height: 1em;
     margin-top: 10px;
-}
-
-.sun div:nth-child(2) {
-    transform: rotate(18deg);
-}
-
-.sun div:nth-child(3) {
-    transform: rotate(36deg);
-}
-
-.sun div:nth-child(4) {
-    transform: rotate(54deg);
-}
-
-.sun div:nth-child(5) {
-    transform: rotate(72deg);
-}
-
-.sun div:nth-child(6) {
-    transform: rotate(90deg);
-}
-
-.sun div:nth-child(7) {
-    transform: rotate(108deg);
-}
-
-.sun div:nth-child(8) {
-    transform: rotate(126deg);
-}
-
-.sun div:nth-child(9) {
-    transform: rotate(144deg);
-}
-
-.sun div:nth-child(10) {
-    transform: rotate(162deg);
-}
-
-.pers_100 div {
-    border-color: #a5df41;
-}
-
-.pers_50 div,
-.pers_60 div,
-.pers_70 div,
-.pers_80 div,
-.pers_90 div,
-.pers_95 div {
-    border-top: 10px solid #a5df41;
-}
-
-.pers_60 div:nth-child(-n+2) {
-    border-bottom: 10px solid #a5df41;
-}
-
-.pers_70 div:nth-child(-n+4) {
-    border-bottom: 10px solid #a5df41;
-}
-
-.pers_80 div:nth-child(-n+6) {
-    border-bottom: 10px solid #a5df41;
-}
-
-.pers_90 div:nth-child(-n+8) {
-    border-bottom: 10px solid #a5df41;
-}
-
-.pers_95 div:nth-child(-n+9) {
-    border-bottom: 10px solid #a5df41;
 }
 
 
@@ -708,7 +690,12 @@ article.skills {
     /*    transform: translateY(50px); */
 }
 
-.experience_card:hover .face.face1 {
+.experience_card:focus-visible {
+    outline: none;
+}
+
+.experience_card:hover .face.face1,
+.experience_card:focus-within .face.face1 {
     background: #ff0057;
     transform: translateY(-50px);
 }
@@ -729,7 +716,8 @@ article.skills {
     text-align: center;
 }
 
-.experience_card:hover .face.face1 .content {
+.experience_card:hover .face.face1 .content,
+.experience_card:focus-within .face.face1 .content {
     color: #fff;
 }
 
@@ -745,25 +733,22 @@ article.skills {
     font-size: 1.5em;
 }
 
+/* The box keeps a fixed height (it defines the spacing between cards);
+   longer text grows .content past its bottom edge over the next card instead of breaking the layout */
 .face.face2 {
     width: 100%;
     height: 5.5em;
+    opacity: 0;
     position: relative;
-    background: none;
-    color: rgba(0, 0, 0, 1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+    color: #000;
     box-sizing: border-box;
-    /*    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8); */
     transform: translateY(-100px);
 }
 
-.experience_card:hover .face.face2 {
+.experience_card:hover .face.face2,
+.experience_card:focus-within .face.face2 {
+    opacity: 1;
     transform: translateY(-50px);
-    background: #fff;
-    color: #000;
 }
 
 .face.face2 .content p {
@@ -797,8 +782,20 @@ article.skills {
 
 .face2 .content {
     width: 100%;
+    min-height: 100%;
+    box-sizing: border-box;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     line-height: 1em;
     text-align: left;
+    transition: background 0.5s;
+}
+
+.experience_card:hover .face2 .content,
+.experience_card:focus-within .face2 .content {
+    background: #fff;
 }
 
 .experience_container .experience_card:nth-child(n+2) {
